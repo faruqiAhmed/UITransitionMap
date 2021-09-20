@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         Home()
+       
     }
 }
 
@@ -22,6 +23,7 @@ struct Home: View {
     var body: some View{
         VStack{
             Login()
+               
         }
     }
     
@@ -29,18 +31,21 @@ struct Home: View {
 
 struct Login : View {
     @State var color = Color.black.opacity(0.7)
+   
     @State var email = ""
     @State var pass = ""
     @State var visible = false
     var body: some View{
+        
         VStack{
              
-            Text(" Log in to your Account")
+            Text(" あなたのアカウントにログイン")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(self.color)
                 .padding(.top ,8)
             TextField ("Eメール", text: self.$email)
+                
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ?  Color("Color"): self.color,lineWidth: 2))
                 .padding(.top, 25)
@@ -55,18 +60,48 @@ struct Login : View {
                     }
                 }
                 Button(action: {
-                    visible.toggle()
+                    self.visible.toggle()
                     
                 }) {
                     
                     Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                        .foregroundColor(self.color)
+                        .foregroundColor(Color.orange)
                 }
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ?  Color("Color"): self.color,lineWidth: 2))
             .padding(.top, 25)
+            
+            Button(action:  {
+               
+            })
+            {
+               Text("ログイン")
+                .foregroundColor(.white)
+                .padding(.vertical)
+                .frame( width: UIScreen.main.bounds.width - 50)
+            }
+            .background(Color("Color"))
+            .cornerRadius(10)
+            .padding(.top, 25)
+            
+            Button (action:  {
+                
+            })
+            {
+                Spacer()
+                Text("アカウントをお持ちではありませんか？ -クレタ島とアカウント")
+                    .foregroundColor(.black)
+                    .padding(.vertical)
+                   
+            }
+           
+           
+            
         }
         .padding(.horizontal,25)
+       
+       
+       
     }
 }
