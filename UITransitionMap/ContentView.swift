@@ -177,7 +177,7 @@ struct SingUp : View {
                     .padding(.vertical)
                    
             }
-           
+            .padding()
            
             
         }
