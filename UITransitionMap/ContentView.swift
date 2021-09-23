@@ -20,10 +20,21 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 struct Home: View {
+    @State var show = false
     var body: some View{
-        VStack{
-           SingUp()
-               
+        NavigationView{
+            ZStack{
+                NavigationLink(destination: SingUp(show: self.$show),
+                               isActive: self.$show ){
+                    Text("")
+                    
+                }
+                .hidden()
+                Login(show: self.$show)
+            }
+            .navigationTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
     }
     
@@ -35,6 +46,7 @@ struct Login : View {
     @State var email = ""
     @State var pass = ""
     @State var visible = false
+    @Binding var show : Bool
     var body: some View{
         
         VStack{
@@ -85,18 +97,26 @@ struct Login : View {
             .cornerRadius(10)
             .padding(.top, 25)
             
-            Button (action:  {
+            HStack(spacing: 8){
                 
-            })
-            {
-                Spacer()
-                Text("アカウントをお持ちではありませんか？クレタ島とアカウント")
-                    .foregroundColor(.black)
-                    .padding(.vertical)
+                Text("すでに持っていて、アカウントを持っていますか？")
+                    .font(.system(size: 10))
                    
+                Button (action:  {
+                    self.show.toggle()
+                })
+                {
+                   
+                    Text(" クレタ島とアカウント")
+                        .foregroundColor(.red)
+                        .font(.system(size: 10))
+                       
+                }
+               
+                .padding(10)
             }
            
-           
+        
             
         }
         .padding(.horizontal,25)
@@ -111,6 +131,7 @@ struct SingUp : View {
     @State var email = ""
     @State var pass = ""
     @State var visible = false
+    @Binding var show : Bool
     var body: some View{
         
         VStack{
@@ -167,23 +188,29 @@ struct SingUp : View {
             .cornerRadius(10)
             .padding(.top, 25)
             
-            Button (action:  {
-                
-            })
-            {
-                Spacer()
-                Text("すでに持っていて、アカウントを持っていますか？ ログイン")
-                    .foregroundColor(.black)
-                    .padding(.vertical)
+            HStack(spacing: 8){
+                Text("すでに持っていて、アカウントを持っていますか？")
+                    .font(.system(size: 12))
+                Button (action:  {
+                    self.show.toggle()
+                })
+                {
                    
+                    Text(" ログイン")
+                        .foregroundColor(.red)
+                        .font(.system(size: 12))
+                       
+                }
+                .padding(10)
+               
             }
-            .padding()
-           
+            
+            
             
         }
         .padding(.horizontal,25)
        
-       
+        .navigationBarBackButtonHidden(true)
        
     }
 }
